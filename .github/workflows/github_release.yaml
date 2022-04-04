@@ -20,18 +20,18 @@ jobs:
         with:
           gradlePath: app/build.gradle.kts
 
+      - name: Get Lastest Release Tag
+        id: tags
+        run: |
+          echo ::set-output name=prev::`git tag -l "[0-9]*[.][0-9]*([0-9]*)" --sort=-version:refname | head -n 1` name=new::${{ steps.versioning.outputs.versionName}}(${{ steps.versioning.outputs.versionCode}})
+
       - name: Create Release Tag
         id: createReleaseTag
         uses: richardsimko/update-tag@v1
         with:
-          tag_name: ${{ steps.versioning.outputs.versionName}}(${{ steps.versioning.outputs.versionCode}})
+          tag_name: ${{ steps.tags.outputs.new }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Get Lastest Release Tag
-        id: lastest
-        run: |
-          echo ::set-output name=tag::`git tag -l "[0-9]*[.][0-9]*([0-9]*)" --sort=-version:refname | head -n 1`
 
       - name: Build Release Notes Formatted PR
         id: github_release
@@ -39,11 +39,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          toTag: ${{ steps.versioning.outputs.versionName}}(${{ steps.versioning.outputs.versionCode}})
-          fromTag: ${{ steps.lastest.outputs.tag }}
+          toTag: ${{ steps.tags.outputs.new }}
+          fromTag: ${{ steps.tags.outputs.prev }}
           configuration: ".github/workflows/configuration_github_release.json"
 
-      - name: Create Release
+      - name: Log Release
         run: |
           echo "${{ steps.github_release.outputs.changelog }}"
 
+      - name: Create Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: $${{ steps.tags.outputs.new }}
+          release_name: v ${{ steps.tags.outputs.new }}
+          body: ${{steps.github_release.outputs.changelog}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
