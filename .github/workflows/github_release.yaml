@@ -18,6 +18,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+
       - name: Get Android version
         id: versioning
         uses: ltDino/android-get-version-action@v1.0
