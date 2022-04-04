@@ -29,5 +29,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           configuration: "configuration_github_release.json"
-      - name: Result
+      - name: Result Commit
+        run: echo ${{ steps.commits.outputs.changelog }}
+      - name: Result PR
         run: echo ${{ steps.prs.outputs.changelog }}
