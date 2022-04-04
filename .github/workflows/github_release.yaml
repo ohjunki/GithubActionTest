@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - github_release_test
+      - github_release_test/*
 
 jobs:
   create-release-notes:
