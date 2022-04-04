@@ -20,6 +20,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Result
-        env:
-          RESULT: ${{ builder.outputs }}
         run: echo ${{ builder.outputs }}
