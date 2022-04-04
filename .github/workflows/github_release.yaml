@@ -28,6 +28,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get Lastest Release Tag
+        id: lastest
+        run: |
+          echo ::set-output name=tag::`git tag -l "[0-9]*[.][0-9]*([0-9]*)" --sort=-version:refname | head -n 1`
+
       - name: Build Release Notes Formatted PR
         id: github_release
         uses: mikepenz/release-changelog-builder-action@v2
@@ -35,16 +40,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           toTag: ${{ steps.versioning.outputs.versionName}}(${{ steps.versioning.outputs.versionCode}})
-          fromTag: lastestRelease
+          fromTag: ${{ steps.lastest.outputs.tag }}
           configuration: ".github/workflows/configuration_github_release.json"
-
-      - name: Update Lastest Release Tag
-        id: updateLastest
-        uses: richardsimko/update-tag@v1
-        with:
-          tag_name: lastestRelease
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         run: |
