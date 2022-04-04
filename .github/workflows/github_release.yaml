@@ -10,7 +10,6 @@ jobs:
   create-release-notes:
     runs-on: ubuntu-latest
     steps:
-      - uses: hmarr/debug-action@v2
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -21,3 +20,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Result
         run: echo ${{ steps.builder.outputs }}
+      - uses: hmarr/debug-action@v2
