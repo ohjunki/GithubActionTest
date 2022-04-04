@@ -14,12 +14,21 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Build Release Notes
-        id: builder
+      - name: Build Release Notes Commits
+        id: commits
         uses: mikepenz/release-changelog-builder-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          commitMode: true
           configuration: "configs/configuration_github_release.json"
+
+      - name: Build Release Notes Formatted PR
+        id: commits
+        uses: mikepenz/release-changelog-builder-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          configuration: "configuration_github_release.json"
       - name: Result
-        run: echo ${{ steps.builder.outputs.changelog }}
+        run: echo ${{ steps.commits.outputs.changelog }}
