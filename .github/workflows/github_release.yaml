@@ -33,6 +33,6 @@ jobs:
           fromTag: 1.3
           configuration: "configuration_github_release.json"
       - name: Result Commit
-        run: echo ${{ steps.commits.outputs.pull_requests }}
+        run: echo ${{ steps.commits.outputs.changelog }}
       - name: Result PR
-        run: echo ${{ steps.prs.outputs.pull_requests }}
+        run: echo ${{ steps.prs.outputs.changelog }}
