@@ -51,7 +51,7 @@ jobs:
       - name: Create Release
         uses: actions/create-release@v1
         with:
-          tag_name: $${{ steps.tags.outputs.new }}
+          tag_name: ${{ steps.tags.outputs.new }}
           release_name: v ${{ steps.tags.outputs.new }}
           body: ${{steps.github_release.outputs.changelog}}
         env:
