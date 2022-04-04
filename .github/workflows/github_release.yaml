@@ -19,5 +19,7 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          configuration: "configuration_github_release.json"
       - name: Result
         run: echo ${{ steps.builder.outputs.changelog }}
