@@ -22,7 +22,7 @@ jobs:
         id: tags
         run: |
           echo ::set-output name=prev::`git tag -l "[0-9]*[.][0-9]*([0-9]*)" --sort=-version:refname | head -n 1`
-          echo ::set-output name=new::${{ steps.versioning.outputs.versionName}}(${{ steps.versioning.outputs.versionCode}})
+          echo "::set-output name=new::${{ steps.versioning.outputs.versionName}}(${{ steps.versioning.outputs.versionCode}})"
 
       - name: Log Release
         run: |
