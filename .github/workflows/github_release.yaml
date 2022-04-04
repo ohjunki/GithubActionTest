@@ -20,4 +20,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Result
-        run: echo ${{ builder.outputs }}
+        run: echo ${{ steps.builder.outputs }}
