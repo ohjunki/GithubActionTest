@@ -26,4 +26,4 @@ jobs:
 
       - name: Log Release
         run: |
-          echo "${{ steps.github_release.outputs.prev }} ${{ steps.github_release.outputs.new }}"
+          echo "${{ steps.tags.outputs.prev }} ${{ steps.tags.outputs.new }}"
