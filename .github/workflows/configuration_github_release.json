@@ -2,7 +2,7 @@
   "categories": [
     {
       "title": "## 🚀 Features",
-      "ignore_labels": [],
+      "exclude_labels": [],
       "exhaustive": true
     }
   ],
