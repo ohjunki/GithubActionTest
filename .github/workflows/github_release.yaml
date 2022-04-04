@@ -31,4 +31,4 @@ jobs:
         with:
           configuration: "configuration_github_release.json"
       - name: Result
-        run: echo ${{ steps.commits.prs.changelog }}
+        run: echo ${{ steps.prs.outputs.changelog }}
