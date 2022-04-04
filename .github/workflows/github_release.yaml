@@ -22,7 +22,7 @@ jobs:
         with:
           toTag: 1.4
           fromTag: 1.3
-          configuration: ".github/workflows/configuration_github_release.json"
+          configuration: "configuration_github_release.json"
 
       - name: Result PR
         run: echo ${{ steps.prs.outputs.changelog }}
