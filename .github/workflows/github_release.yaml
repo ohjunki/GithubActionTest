@@ -22,4 +22,4 @@ jobs:
         with:
           configuration: "configs/configuration_github_release.json"
       - name: Result
-        run: echo ${{ steps.builder.outputs. }}
+        run: echo ${{ steps.builder.outputs.changelog }}
