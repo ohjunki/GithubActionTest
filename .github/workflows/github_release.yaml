@@ -13,6 +13,6 @@ jobs:
       - uses: hmarr/debug-action@v2
       - uses: toshimaru/auto-author-assign@v1.4.0
       - name: Create Release Notes
-        uses: mikepenz/release-changelog-builder-action@{latest-release}
+        uses: mikepenz/release-changelog-builder-action@1.10.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
