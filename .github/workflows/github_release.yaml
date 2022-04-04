@@ -14,8 +14,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get Android version
+        id: versioning
+        uses: ltDino/android-get-version-action@v1.0
+        with:
+          gradlePath: app/build.gradle.kts
+
       - name: Build Release Notes Formatted PR
-        id: prs
+        id: github_release
         uses: mikepenz/release-changelog-builder-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -24,5 +30,7 @@ jobs:
           fromTag: 1.3
           configuration: ".github/workflows/configuration_github_release.json"
 
-      - name: Result PR
-        run: echo ${{ steps.prs.outputs.changelog }}
+      - name: Create Release
+        run: |
+          echo "The versionCode was ${{ steps.versioning.outputs.versionCode }}"
+          echo "The versionName was ${{ steps.versioning.outputs.versionName }}"

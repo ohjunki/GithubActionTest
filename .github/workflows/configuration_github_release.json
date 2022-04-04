@@ -5,7 +5,7 @@
       "labels": ["feature"]
     }
   ],
-  "template": "${{CHANGELOG}}\n\n## Others\n${{UNCATEGORIZED}}",
+  "template": "${{CHANGELOG}}## Others\n\n${{UNCATEGORIZED}}",
   "pr_template": "- ${{TITLE}} (#${{NUMBER}})",
   "max_pull_requests": 1000,
   "max_back_track_time_days": 1000
