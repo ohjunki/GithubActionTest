@@ -20,17 +20,33 @@ jobs:
         with:
           gradlePath: app/build.gradle.kts
 
+      - name: Create Release Tag
+        id: createReleaseTag
+        uses: richardsimko/update-tag@v1
+        with:
+          tag_name: ${{ steps.versioning.outputs.versionName}}(${{ steps.versioning.outputs.versionCode}})
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build Release Notes Formatted PR
         id: github_release
         uses: mikepenz/release-changelog-builder-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          toTag: 1.4
-          fromTag: 1.3
+          toTag: ${{ steps.versioning.outputs.versionName}}(${{ steps.versioning.outputs.versionCode}})
+          fromTag: lastestRelease
           configuration: ".github/workflows/configuration_github_release.json"
+
+      - name: Update Lastest Release Tag
+        id: updateLastest
+        uses: richardsimko/update-tag@v1
+        with:
+          tag_name: lastestRelease
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         run: |
-          echo "The versionCode was ${{ steps.versioning.outputs.versionCode }}"
-          echo "The versionName was ${{ steps.versioning.outputs.versionName }}"
+          echo "${{ steps.github_release.outputs.changelog }}"
+
