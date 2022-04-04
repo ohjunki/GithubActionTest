@@ -4,12 +4,15 @@ on:
   push:
     branches:
       - master
-      - github_release_test
+      - github_release/*
 
 jobs:
   create-release-notes:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: hmarr/debug-action@v2
       - name: Create Release Notes
         uses: mikepenz/release-changelog-builder-action@v2
