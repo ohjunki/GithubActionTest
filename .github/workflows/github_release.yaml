@@ -21,7 +21,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           commitMode: true
-          configuration: "configs/configuration_github_release.json"
 
       - name: Build Release Notes Formatted PR
         id: prs
