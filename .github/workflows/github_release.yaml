@@ -2,6 +2,8 @@ name: "Github Release"
 
 on:
   push:
+    tags:
+      - '*'
     branches:
       - master
       - github_release/*
