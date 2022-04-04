@@ -10,11 +10,14 @@ jobs:
   create-release-notes:
     runs-on: ubuntu-latest
     steps:
+      - uses: hmarr/debug-action@v2
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - uses: hmarr/debug-action@v2
-      - name: Create Release Notes
+          fetch-depth: 0
+      - name: Build Release Notes
+        id: builder
         uses: mikepenz/release-changelog-builder-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Result
+        run: echo ${{ steps.builder.outputs.changelog }}
