@@ -2,9 +2,8 @@ name: "Github Release"
 
 on:
   push:
-    branches:
-      - master
-      - github_release/*
+    tags:
+      - *
 
 jobs:
   create-release-notes:
