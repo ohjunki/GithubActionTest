@@ -10,8 +10,8 @@ android {
         applicationId = "com.souldi.souldi.githubactiontest"
         minSdk =  24
         targetSdk =  31
-        versionCode =  5
-        versionName =  "1.4.0"
+        versionCode =  6
+        versionName =  "1.5.0"
     }
 
     buildTypes {
