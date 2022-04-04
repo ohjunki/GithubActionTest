@@ -1,4 +1,10 @@
 {
+  "categories": [
+    {
+      "title": "## 🚀 Features",
+      "exclude_labels": []
+    }
+  ],
   "template": "${{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n${{UNCATEGORIZED}}\n</details>",
   "pr_template": "- ${{TITLE}} (#${{NUMBER}})",
   "max_pull_requests": 1000,
