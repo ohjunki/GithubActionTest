@@ -30,6 +30,6 @@ jobs:
         with:
           configuration: "configuration_github_release.json"
       - name: Result Commit
-        run: echo ${{ steps.commits.outputs.changelog }}
+        run: echo ${{ steps.commits.outputs.pull_requests }}
       - name: Result PR
-        run: echo ${{ steps.prs.outputs.changelog }}
+        run: echo ${{ steps.prs.outputs.pull_requests }}
